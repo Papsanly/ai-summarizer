@@ -1,3 +1,16 @@
+import './App.css'
+import { Demo, Hero } from './components'
+
 export default function App() {
-  return <h1>Hello</h1>
+  return (
+    <main>
+      <div className={'main'}>
+        <div className={'gradient'} />
+      </div>
+      <div className={'app'}>
+        <Hero />
+        <Demo />
+      </div>
+    </main>
+  )
 }
