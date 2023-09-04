@@ -8,6 +8,7 @@ export default function Demo() {
     summary: '',
   })
   const [allArticles, setAllArticles] = useState([])
+  const [copied, setCopied] = useState('')
 
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery()
 
@@ -35,6 +36,13 @@ export default function Demo() {
 
       console.log(newArticle)
     }
+  }
+
+  const handleCopy = copyUrl => {
+    setCopied(copyUrl)
+    navigator.clipboard
+      .writeText(copyUrl)
+      .then(() => setTimeout(() => setCopied(''), 3000))
   }
 
   return (
@@ -73,10 +81,10 @@ export default function Demo() {
               onClick={() => setArticle(item)}
               className={'link_card'}
             >
-              <div className={'copy_btn'}>
+              <div className={'copy_btn'} onClick={() => handleCopy(item.url)}>
                 <img
-                  src={copy}
-                  alt={'copy'}
+                  src={copied === item.url ? tick : copy}
+                  alt={copied === item.url ? 'copied' : 'copy'}
                   className={'w-[40%] h-[40%] object-contain'}
                 />
               </div>
